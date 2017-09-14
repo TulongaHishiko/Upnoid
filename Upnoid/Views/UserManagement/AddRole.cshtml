@@ -1,0 +1,30 @@
+﻿@model UpnoidV3.ViewModels.UserManagementAddRoleViewModel
+
+<h3>Add Role For @Model.Email</h3>
+<div asp-validation-summary="All"></div>
+<form asp-controller="UserManagement" asp-action="AddRole">
+    <input asp-for="UserId" type="hidden" />
+    <select asp-for="NewRole" asp-items="Model.Roles"></select>
+    <input type="submit"value="Add Role" />
+</form>
+
+@*
+
+    @{
+        ViewBag.Title = "AssignRoletoUser";
+    }
+    <h2>AssignRoleToUser</h2>
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Select Your Type
+            </label>
+            <div class="col-md-10">
+                @Html.DropDownList("UserName")
+            </div>
+        </div>
+        <input type="submit" value="Create Role" />
+    }
+*@

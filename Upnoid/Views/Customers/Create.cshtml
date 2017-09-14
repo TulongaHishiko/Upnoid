@@ -1,0 +1,90 @@
+@model UpnoidV3.Models.Customer
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@section AddToHead {
+    
+    <link href="~/lib/datedropper/datedropper.css" rel="stylesheet" />
+  
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+    <div class="form-horizontal">
+        <h4>Customer</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="LastName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="FirstName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger" />
+            </div>
+        </div>  
+        <div class="form-group">
+            <label asp-for="Birthdate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Birthdate" class="form-control" type="text" id="datepicker" />
+                <span asp-validation-for="Birthdate" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.IsSubcribedToNewsletter) Subscribed to Newsletter?
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back</a>
+</div>
+
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }
+@*
+    <script src="~/lib/datedropper/datedropper.js"></script>
+        <script>
+             //$(".chzn-select").chosen();
+             var options = {
+                 format: "d/m/Y",
+                 placeholder: "Choose date"
+             };
+              //  lock: "from",
+              //  maxYear: @DateTime.Now.AddYears(1).ToString("yyyy");
+               // minYear:@DateTime.Now.ToString("yyyy")};
+            $("#datepicker").dateDropper(options);
+
+        </script>
+
+    }
+*@

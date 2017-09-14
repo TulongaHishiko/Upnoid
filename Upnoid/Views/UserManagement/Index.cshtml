@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model UpnoidV3.ViewModels.UserManagementIndexViewModel
+@inject UserManager<ApplicationUser> userManager
+@{
+    ViewData["Title"] = "Roles";
+}
+<h2>Roles</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Options</th> 
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@(string.Join(",",await userManager.GetRolesAsync(user)))</td>
+                <td><a asp-controller="UserManagement" asp-action="AddRole" asp-route-id="@user.Id"class="btn btn-danger">Add Role</a></td>
+            </tr>
+        }   
+    </tbody>
+</table>

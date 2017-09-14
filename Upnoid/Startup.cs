@@ -8,9 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Upnoid.Data;
-using Upnoid.Models;
 using Upnoid.Services;
+using Upnoid.Core.Configurations;
 
 namespace Upnoid
 {
@@ -26,13 +25,8 @@ namespace Upnoid
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
+            services.AddEntityFramework();
+            services.AddRepositories();
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
@@ -56,7 +50,7 @@ namespace Upnoid
             app.UseStaticFiles();
 
             app.UseAuthentication();
-
+            DbInitializer.SeedData(app,env);
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

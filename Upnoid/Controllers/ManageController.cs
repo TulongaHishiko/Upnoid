@@ -10,9 +10,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Upnoid.Models;
-using Upnoid.Models.ManageViewModels;
+using Upnoid.ViewModels;
+using Upnoid.ViewModels.ManageViewModels;
 using Upnoid.Services;
+using Upnoid.Domain.Models;
 
 namespace Upnoid.Controllers
 {

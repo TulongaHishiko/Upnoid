@@ -10,9 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Upnoid.Models;
-using Upnoid.Models.AccountViewModels;
+using Upnoid.ViewModels;
+using Upnoid.ViewModels.AccountViewModels;
 using Upnoid.Services;
+using Upnoid.Domain.Models;
 
 namespace Upnoid.Controllers
 {
@@ -224,6 +225,7 @@ namespace Upnoid.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Customer");
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
